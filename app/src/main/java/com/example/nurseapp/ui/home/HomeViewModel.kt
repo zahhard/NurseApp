@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nurseapp.data.repository.AppRepository
 import com.example.nurseapp.model.Category
+import com.example.nurseapp.model.Nurse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,6 +14,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : ViewModel() {
 
     var categoryListLiveData = MutableLiveData<List<Category>>()
+    var topNursesListLiveData = MutableLiveData<List<Nurse>>()
 
     fun setCategory(){
         viewModelScope.launch {
@@ -21,5 +23,9 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     }
 
-    fun get(){}
+    fun setTopNurses() {
+        viewModelScope.launch {
+            topNursesListLiveData.value = appRepository.getTopNurses()
+        }
+    }
 }
