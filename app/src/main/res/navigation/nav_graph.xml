@@ -19,4 +19,9 @@
         android:name="com.example.nurseapp.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/insideEachCategoryFragment"
+        android:name="com.example.nurseapp.ui.inside_of_each_otem.InsideEachCategoryFragment"
+        android:label="fragment_inside_each_category"
+        tools:layout="@layout/fragment_inside_each_category" />
 </navigation>

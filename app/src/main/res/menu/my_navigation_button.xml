@@ -6,7 +6,7 @@
         <item android:id="@+id/homeFragment"
             android:title="Home"
             android:icon="@drawable/ic_baseline_home_24" />
-        <item android:id="@+id/thirdFragment"
+        <item android:id="@+id/insideEachCategoryFragment"
             android:title="nurses"
             android:icon="@drawable/ic_baseline_wheelchair_pickup_24" />
 

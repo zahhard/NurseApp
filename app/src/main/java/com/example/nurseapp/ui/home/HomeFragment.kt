@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.nurseapp.R
 import com.example.nurseapp.adapter.CategoryAdapter
+import com.example.nurseapp.adapter.SliderAdapter
 import com.example.nurseapp.adapter.TopNursesAdapter
 import com.example.nurseapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     val homeViewModel: HomeViewModel by viewModels()
+    var listOfImages = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,7 @@ class HomeFragment : Fragment() {
 //        homeViewModel.get()
         homeViewModel.setCategory()
         homeViewModel.setTopNurses()
+        homeViewModel.getSpecialNurses()
 
         homeViewModel.categoryListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())
@@ -62,6 +68,22 @@ class HomeFragment : Fragment() {
                 requireContext(),
                 LinearLayoutManager.HORIZONTAL, false
             )
+        }
+
+
+        homeViewModel.specialNursesListLiveData.observe(viewLifecycleOwner) {
+            for (nurse in it) {
+                listOfImages.add(nurse.image)
+            }
+            binding.viewPagerImageSlider.adapter =
+                SliderAdapter(this, listOfImages, binding.viewPagerImageSlider)
+            binding.viewPagerImageSlider.clipToPadding = false
+            binding.viewPagerImageSlider.clipChildren = false
+            binding.viewPagerImageSlider.offscreenPageLimit = 3
+            binding.viewPagerImageSlider.getChildAt(0).overScrollMode =
+                RecyclerView.OVER_SCROLL_NEVER
+            var compositePageTransformer = CompositePageTransformer()
+            compositePageTransformer.addTransformer(MarginPageTransformer(40))
         }
     }
 

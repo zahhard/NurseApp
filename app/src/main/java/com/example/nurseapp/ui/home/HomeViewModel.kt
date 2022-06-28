@@ -15,6 +15,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     var categoryListLiveData = MutableLiveData<List<Category>>()
     var topNursesListLiveData = MutableLiveData<List<Nurse>>()
+    var specialNursesListLiveData = MutableLiveData<List<Nurse>>()
 
     fun setCategory(){
         viewModelScope.launch {
@@ -26,6 +27,12 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
     fun setTopNurses() {
         viewModelScope.launch {
             topNursesListLiveData.value = appRepository.getTopNurses()
+        }
+    }
+
+    fun getSpecialNurses() {
+        viewModelScope.launch {
+            specialNursesListLiveData.value = appRepository.getTopNurses()
         }
     }
 }
