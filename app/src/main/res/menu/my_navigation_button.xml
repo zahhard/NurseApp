@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/firstFragment"
+            android:title="Profile"
+            android:icon="@drawable/ic_baseline_person_24" />
+        <item android:id="@+id/homeFragment"
+            android:title="Home"
+            android:icon="@drawable/ic_baseline_home_24" />
+        <item android:id="@+id/thirdFragment"
+            android:title="nurses"
+            android:icon="@drawable/ic_baseline_wheelchair_pickup_24" />
+
+</menu>
