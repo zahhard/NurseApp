@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.nurseapp.R
 import com.example.nurseapp.model.Category
 
@@ -40,11 +44,13 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.title.text = getItem(position).name
-
+        val transformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
         Glide.with(fragment)
             .load(getItem(position).src)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(android.R.drawable.ic_dialog_info)
+            .error(android.R.drawable.ic_dialog_alert)
+//            .apply(RequestOptions.circleCropTransform())
+            .transform(transformation)
             .into(holder.imageViewItemCategory)
 
 //        val  colorList = arrayListOf("#E2B646", "#9DE246", "#46E2A1", "#468EE2", "#E24646")
@@ -61,6 +67,8 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
         holder.itemView.setOnClickListener {
             showFilmDetails(getItem(position).id)
         }
+
+        holder.itemView.onFocusChangeListener
 
     }
 
