@@ -1,4 +1,8 @@
 package com.example.nurseapp.data.repository
 
-class LocalDataSource {
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+
+class LocalDataSource  @Inject constructor() {
 }

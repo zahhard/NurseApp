@@ -1,42 +1,75 @@
 package com.example.nurseapp.di
 
-
 import com.example.nurseapp.data.network.ApiService
-import com.example.nurseapp.data.repository.AppRepository
-import com.example.nurseapp.data.repository.LocalDataSource
-import com.example.nurseapp.data.repository.RemoteDataSource
-import com.example.nurseapp.ui.home.HomeViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
-val appModule = module {
+@InstallIn(SingletonComponent::class)
+@Module
+object AppModule {
+//
+//    @Singleton
+//    @Provides
+//    fun provideRetrofit(moshi: Moshi, client: OkHttpClient): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(NetworkParams.BASE_URL)
+//            .addConverterFactory(MoshiConverterFactory.create(moshi))
+//            .client(client)
+//            .build()
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideMoshi(): Moshi {
+//        return Moshi.Builder()
+//            .add(KotlinJsonAdapterFactory())
+//            .build()
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideClient(): OkHttpClient {
+//        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+//
+//        return OkHttpClient.Builder()
+//            .addInterceptor(logger)
+//            .connectTimeout(50, TimeUnit.SECONDS)
+//            .build()
+//    }
 
-    factory<AppRepository> { get() }
-    factory<RemoteDataSource> { get() }
+    @Singleton
+    @Provides
+    fun provideApiService(): ApiService {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .build()
 
-    single { LocalDataSource() }
-
-    single { AppRepository(get(), get()) }
-
-    single { RemoteDataSource (get()) }
-
-
-    single {
-        val retrofit = get() as Retrofit
-        val loginApiService = retrofit.create(ApiService::class.java)
-
-        loginApiService
-    }
-    single {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://example.com")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .client(client)
             .build()
-        retrofit
-    }
 
-    viewModel { HomeViewModel (get()) }
-//    viewModel { LoginViewModel (get()) }
-//    viewModel { HomeViewModel (get()) }
+        val apiService = retrofit.create(ApiService::class.java)
+
+        return apiService
+    }
 }

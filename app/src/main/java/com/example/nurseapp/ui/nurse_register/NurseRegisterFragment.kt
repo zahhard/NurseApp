@@ -1,21 +1,19 @@
 package com.example.nurseapp.ui.nurse_register
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nurseapp.R
-import com.example.nurseapp.databinding.FragmentHomeBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.nurseapp.databinding.FragmentNurceRegesterBinding
-import com.example.nurseapp.ui.home.HomeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NurseRegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentNurceRegesterBinding
-    val  nurseRegisterViewModel: NurseRegisterViewModel by viewModel()
+    val  nurseRegisterViewModel: NurseRegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

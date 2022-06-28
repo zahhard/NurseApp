@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nurseapp.MainActivity
 import com.example.nurseapp.R
+import dagger.hilt.android.AndroidEntryPoint
 import org.w3c.dom.Text
 
-
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,17 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nurseapp.R
+import androidx.fragment.app.viewModels
 import com.example.nurseapp.databinding.FragmentDetailBinding
-import com.example.nurseapp.databinding.FragmentHomeBinding
-import com.example.nurseapp.ui.home.HomeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
-    val detailViewModel: DetailViewModel by viewModel()
+    val detailViewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

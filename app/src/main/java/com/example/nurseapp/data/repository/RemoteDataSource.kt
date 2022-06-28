@@ -1,4 +1,9 @@
 package com.example.nurseapp.data.repository
 
-class RemoteDataSource (var appRepository: AppRepository) {
+import com.example.nurseapp.data.network.ApiService
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+
+class RemoteDataSource  @Inject constructor(var apiService: ApiService) {
 }

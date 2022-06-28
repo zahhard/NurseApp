@@ -43,8 +43,8 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
 
         Glide.with(fragment)
             .load(getItem(position).src)
-            .placeholder(R.drawable.ic_android_black_24dp)
-            .error(R.drawable.ic_android_black_24dp)
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_background)
             .into(holder.imageViewItemCategory)
 
 //        val  colorList = arrayListOf("#E2B646", "#9DE246", "#46E2A1", "#468EE2", "#E24646")

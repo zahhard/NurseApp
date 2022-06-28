@@ -1,8 +1,11 @@
 package com.example.nurseapp.data.repository
 
 import com.example.nurseapp.model.Category
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class AppRepository (val localDataSource: LocalDataSource,
+
+class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
                      val remoteDataSource: RemoteDataSource) {
 
     var categoryList = arrayListOf<Category>(
