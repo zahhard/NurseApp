@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import com.example.nurseapp.adapter.CategoryAdapter
 import com.example.nurseapp.adapter.SliderAdapter
 import com.example.nurseapp.adapter.TopNursesAdapter
 import com.example.nurseapp.databinding.FragmentHomeBinding
+import com.example.nurseapp.model.InternetConnection
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,6 +46,31 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        homeViewModel.get()
+        checkInternetConnection()
+    }
+
+    private fun goToCategory(id: Int) {
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
+    }
+
+    private fun goToDetail(id: Int) {
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
+    }
+
+    private fun checkInternetConnection() {
+        if (InternetConnection().checkForInternet(requireContext())) {
+            observreAllLiveDatas()
+//            search()
+        } else
+            AlertDialog.Builder(requireContext())
+                .setTitle("Error")
+                .setMessage("Check your internet connection! ")
+                .setPositiveButton("ok") { _, _ -> checkInternetConnection() }
+                .setCancelable(false)
+                .show()
+    }
+
+    private fun observreAllLiveDatas() {
         homeViewModel.setCategory()
         homeViewModel.setTopNurses()
         homeViewModel.getSpecialNurses()
@@ -86,14 +113,6 @@ class HomeFragment : Fragment() {
             var compositePageTransformer = CompositePageTransformer()
             compositePageTransformer.addTransformer(MarginPageTransformer(40))
         }
-    }
-
-    private fun goToCategory(id: Int) {
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
-    }
-
-    private fun goToDetail(id: Int) {
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
     }
 
 }
