@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nurseapp.R
 import com.example.nurseapp.adapter.CategoryAdapter
@@ -43,14 +45,15 @@ class InsideEachCategoryFragment : Fragment() {
         insideEachCategoryViewModel.nursesListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())
             binding.recyclerview.layoutManager = manager
-            var adapter = EachCategotyAdapter(this) { id -> goToCategory(id) }
+            var adapter = EachCategotyAdapter(this) { id -> goToDetail(id) }
             adapter.submitList(it)
             binding.recyclerview.adapter = adapter
         }
     }
 
-    private fun goToCategory(id: Int) {
 
+    private fun goToDetail(id: Int) {
+        findNavController().navigate(R.id.action_insideEachCategoryFragment_to_detailFragment, bundleOf("filmId" to id))
     }
 
 
