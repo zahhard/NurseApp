@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -61,7 +62,7 @@ class HomeFragment : Fragment() {
         homeViewModel.topNursesListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())
             binding.topRecyclerview.layoutManager = manager
-            var adapter = TopNursesAdapter(this) { id -> goToCategory(id) }
+            var adapter = TopNursesAdapter(this) { id -> goToDetail(id) }
             adapter.submitList(it)
             binding.topRecyclerview.adapter = adapter
             binding.topRecyclerview.layoutManager = LinearLayoutManager(
@@ -88,7 +89,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToCategory(id: Int) {
-//        findNavController().navigate(R.id)
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
+    }
+
+    private fun goToDetail(id: Int) {
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
     }
 
 }
