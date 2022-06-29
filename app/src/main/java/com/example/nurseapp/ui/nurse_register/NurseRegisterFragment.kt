@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NurseRegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentNurceRegesterBinding
-    val  nurseRegisterViewModel: NurseRegisterViewModel by viewModels()
+//    val  nurseRegisterViewModel: NurseRegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
