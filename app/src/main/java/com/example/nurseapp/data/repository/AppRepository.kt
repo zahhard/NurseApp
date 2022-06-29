@@ -16,10 +16,10 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         Category(3, "General care", "https://saviorhomecare.com/wp-content/uploads/2021/08/page2.jpeg" ))
 
     var nurseList = arrayListOf<Nurse>(
-        Nurse(0, "nana", "" , "bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
-        Nurse(1, "zahra", "", "bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
-        Nurse(2, "kosar", "", "bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
-        Nurse(3, "shima", "", "bandage" ,"https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ))
+        Nurse(0, "nana", "rahimi" , 5.6F,"bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
+        Nurse(1, "zahra", "davardoust", 5.6F, "bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
+        Nurse(2, "kosar", "zamani", 5.6F, "bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
+        Nurse(3, "shima", "barami", 5.6F, "bandage" ,"https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ))
 
     fun setCategory(): ArrayList<Category>{
         return categoryList
@@ -27,6 +27,10 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
 
     fun getTopNurses(): List<Nurse> {
         return nurseList
+    }
+
+    fun getItemDetail(id: Int): Nurse {
+        return  nurseList[id]
     }
 
 }
