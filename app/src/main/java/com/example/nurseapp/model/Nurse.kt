@@ -1,9 +1,9 @@
 package com.example.nurseapp.model
 
-class Nurse (
+data class Nurse (
     var nurseID : Int = 0,
-    var fname : String = "" ,
-    var lname: String = "f" ,
+    var fname : String = "",
+    var lname: String = "f",
 //    `birthdate` DATE NOT NULL,
 //    `email` VARCHAR(50) NOT NULL,
 //    `phone` VARCHAR(15) NOT NULL,
@@ -12,8 +12,8 @@ class Nurse (
 //    `country` VARCHAR(20) NOT NULL,
 //    `city` VARCHAR(20) NOT NULL,
 //    `address` VARCHAR(100) DEFAULT NULL,
-//    `average_rate` FLOAT NOT NULL,
-    var education: String = "bandage" ,
+    var average_rate: Float = 1.0F,
+    var education: String = "bandage",
 //    `experience` DATE NOT NULL,
 //    `skill` VARCHAR(500) NOT NULL,
 //    `visit` INT NOT NULL,
