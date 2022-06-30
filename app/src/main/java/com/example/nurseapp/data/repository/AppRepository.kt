@@ -1,5 +1,8 @@
 package com.example.nurseapp.data.repository
 
+import androidx.lifecycle.LiveData
+import com.example.nurseapp.data.database.Dao
+import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
 import dagger.hilt.android.AndroidEntryPoint
@@ -8,6 +11,10 @@ import javax.inject.Inject
 
 class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
                      val remoteDataSource: RemoteDataSource) {
+
+    suspend fun setTestData(){
+        localDataSource.setTestData()
+    }
 
     var categoryList = arrayListOf<Category>(
         Category(0, "Baby care", "https://cdn.cdnparenting.com/articles/2018/10/1022205187-H-768x525.jpg" ),
@@ -25,12 +32,21 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         return categoryList
     }
 
-    fun getTopNurses(): List<Nurse> {
-        return nurseList
-    }
+//    fun getTopNurses(): List<Nurse> {
+//        return nurseList
+//    }
 
     fun getItemDetail(id: Int): Nurse {
         return  nurseList[id]
     }
+
+    suspend fun getNurses(): List<NurseEntity> {
+        return localDataSource.getNurses()
+    }
+
+    suspend fun getTopNurses(): List<NurseEntity>{
+        return localDataSource.getTopNurses()
+    }
+
 
 }
