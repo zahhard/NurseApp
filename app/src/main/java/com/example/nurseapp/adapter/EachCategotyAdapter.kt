@@ -15,11 +15,12 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.nurseapp.R
+import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
 
 class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfCategory) :
-    ListAdapter<Nurse, EachCategotyAdapter.ViewHolder>(DiffCallback) {
+    ListAdapter<NurseEntity, EachCategotyAdapter.ViewHolder>(DiffCallback) {
 
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -53,20 +54,20 @@ class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: s
 
 
         holder.itemView.setOnClickListener {
-            showFilmDetails(getItem(position).nurseID)
+            showFilmDetails(getItem(position).id)
         }
 
         holder.itemView.onFocusChangeListener
 
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Nurse>() {
-        override fun areItemsTheSame(oldItem: Nurse, newItem: Nurse): Boolean {
-            return oldItem.nurseID == newItem.nurseID
+    companion object DiffCallback : DiffUtil.ItemCallback<NurseEntity>() {
+        override fun areItemsTheSame(oldItem: NurseEntity, newItem: NurseEntity): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Nurse, newItem: Nurse): Boolean {
-            return oldItem.nurseID == newItem.nurseID
+        override fun areContentsTheSame(oldItem: NurseEntity, newItem: NurseEntity): Boolean {
+            return oldItem.id == newItem.id
         }
     }
 }

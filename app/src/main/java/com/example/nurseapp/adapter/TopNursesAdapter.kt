@@ -14,10 +14,11 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.nurseapp.R
+import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.model.Nurse
 
 class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfCategory) :
-    ListAdapter<Nurse, TopNursesAdapter.ViewHolder>(DiffCallback) {
+    ListAdapter<NurseEntity, TopNursesAdapter.ViewHolder>(DiffCallback) {
 
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -55,12 +56,12 @@ class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: show
 
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Nurse>() {
-        override fun areItemsTheSame(oldItem: Nurse, newItem: Nurse): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<NurseEntity>() {
+        override fun areItemsTheSame(oldItem: NurseEntity, newItem: NurseEntity): Boolean {
             return oldItem.nurseID == newItem.nurseID
         }
 
-        override fun areContentsTheSame(oldItem: Nurse, newItem: Nurse): Boolean {
+        override fun areContentsTheSame(oldItem: NurseEntity, newItem: NurseEntity): Boolean {
             return oldItem.nurseID == newItem.nurseID
         }
     }

@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        homeViewModel.get()
+//        homeViewModel.setTestData()
         checkInternetConnection()
     }
 
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
     private fun observreAllLiveDatas() {
         homeViewModel.setCategory()
         homeViewModel.setTopNurses()
-        homeViewModel.getSpecialNurses()
+//        homeViewModel.getSpecialNurses()
 
         homeViewModel.categoryListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())

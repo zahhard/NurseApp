@@ -53,16 +53,6 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
             .transform(transformation)
             .into(holder.imageViewItemCategory)
 
-//        val  colorList = arrayListOf("#E2B646", "#9DE246", "#46E2A1", "#468EE2", "#E24646")
-//
-//
-////        if (NetworkParams.colorId < 5){
-////            holder.cardView.setCardBackgroundColor(Color.parseColor(colorList[NetworkParams.colorId]));
-////            NetworkParams.colorId ++
-////        }
-////        else
-////            NetworkParams.colorId = 0
-
 
         holder.itemView.setOnClickListener {
             showFilmDetails(getItem(position).id)

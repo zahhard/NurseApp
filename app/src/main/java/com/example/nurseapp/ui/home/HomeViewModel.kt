@@ -3,6 +3,7 @@ package com.example.nurseapp.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.data.repository.AppRepository
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : ViewModel() {
 
     var categoryListLiveData = MutableLiveData<List<Category>>()
-    var topNursesListLiveData = MutableLiveData<List<Nurse>>()
+    var topNursesListLiveData = MutableLiveData<List<NurseEntity>>()
     var specialNursesListLiveData = MutableLiveData<List<Nurse>>()
 
     fun setCategory(){
@@ -31,8 +32,14 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
     }
 
     fun getSpecialNurses() {
+//        viewModelScope.launch {
+//            specialNursesListLiveData.value = appRepository.getTopNurses()
+//        }
+    }
+
+    fun setTestData() {
         viewModelScope.launch {
-            specialNursesListLiveData.value = appRepository.getTopNurses()
+            appRepository.setTestData()
         }
     }
 }
