@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.user_register.ProfileFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp"
+        android:background="#F8DAD0"
+        android:layout_margin="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="#F8DAD0"
+            android:layout_height="match_parent"
+            android:padding="10sp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_person_pin_24"
+                android:backgroundTint="@color/black"/>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zahra Davardoust"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:textColor="#0C5776"/>
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="55dp"
+                android:text="edit"
+                app:cornerRadius="15dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My orders"
+        android:textSize="22dp"
+        android:textColor="#001C44"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="35dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/recyclerview"/>
+
+</LinearLayout>

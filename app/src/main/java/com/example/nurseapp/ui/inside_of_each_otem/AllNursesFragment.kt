@@ -1,6 +1,5 @@
 package com.example.nurseapp.ui.inside_of_each_otem
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,20 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nurseapp.R
-import com.example.nurseapp.adapter.CategoryAdapter
 import com.example.nurseapp.adapter.EachCategotyAdapter
-import com.example.nurseapp.databinding.EachItemBinding
-import com.example.nurseapp.databinding.FragmentHomeBinding
+import com.example.nurseapp.databinding.FragmentAllNursesBinding
 import com.example.nurseapp.databinding.FragmentInsideEachCategoryBinding
-import com.example.nurseapp.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InsideEachCategoryFragment : Fragment() {
+class AllNursesFragment : Fragment() {
 
-    private lateinit var binding: FragmentInsideEachCategoryBinding
+    private lateinit var binding: FragmentAllNursesBinding
     val insideEachCategoryViewModel: InsideEachCategoryViewModel by viewModels()
-//    lateinit var ppreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +30,14 @@ class InsideEachCategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentInsideEachCategoryBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAllNursesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var itemId = requireArguments().getString("education", "")
-        var search = requireArguments().getString("search", "")
-
-        if (search != "")
-            insideEachCategoryViewModel.search(search)
-        else
-            insideEachCategoryViewModel.getItemDetail(itemId)
-
+        insideEachCategoryViewModel.getNurses()
 
         insideEachCategoryViewModel.nursesListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())
@@ -60,10 +48,7 @@ class InsideEachCategoryFragment : Fragment() {
         }
     }
 
-
     private fun goToDetail(id: Int) {
-        findNavController().navigate(R.id.action_insideEachCategoryFragment_to_detailFragment, bundleOf("filmId" to id))
+        findNavController().navigate(R.id.action_allNursesFragment_to_detailFragment, bundleOf("filmId" to id))
     }
-
-
-}
+ }

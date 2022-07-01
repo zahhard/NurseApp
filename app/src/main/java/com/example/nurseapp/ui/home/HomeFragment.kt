@@ -44,13 +44,26 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        homeViewModel.setTestData()
+//
+        homeViewModel.setTestOrder()
+        homeViewModel.setTestData()
         checkInternetConnection()
+
+        binding.imageButton.setOnClickListener {
+            if ( !binding.search.text.isNullOrBlank() ) {
+                var bundle = bundleOf("search" to binding.search.text.toString())
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_insideEachCategoryFragment,
+                    bundle
+                )
+            }
+        }
+
+
     }
 
-    private fun goToCategory(id: Int) {
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf("filmId" to id))
+    private fun goToCategory(id: String) {
+        findNavController().navigate(R.id.action_homeFragment_to_insideEachCategoryFragment, bundleOf("education" to id))
     }
 
     private fun goToDetail(id: Int) {
@@ -73,7 +86,7 @@ class HomeFragment : Fragment() {
     private fun observreAllLiveDatas() {
         homeViewModel.setCategory()
         homeViewModel.setTopNurses()
-//        homeViewModel.getSpecialNurses()
+        homeViewModel.getSpecialNurses()
 
         homeViewModel.categoryListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())

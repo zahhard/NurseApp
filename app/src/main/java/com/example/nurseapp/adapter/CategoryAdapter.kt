@@ -20,7 +20,8 @@ import com.example.nurseapp.R
 import com.example.nurseapp.model.Category
 
 
-typealias showInsideOfCategory = (Int) -> Unit
+typealias showInsideOfItem = (Int) -> Unit
+typealias showInsideOfCategory = (String) -> Unit
 
 
 class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfCategory) :
@@ -55,7 +56,7 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
 
 
         holder.itemView.setOnClickListener {
-            showFilmDetails(getItem(position).id)
+            showFilmDetails(getItem(position).name)
         }
 
         holder.itemView.onFocusChangeListener

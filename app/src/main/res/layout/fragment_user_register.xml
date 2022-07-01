@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".ui.user_register.UserRegisterFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/register">
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +84,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:id="@+id/city"
-            android:inputType="phone"
             android:layout_height="wrap_content"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +100,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:id="@+id/address"
-            android:inputType="phone"
             android:layout_height="wrap_content"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,5 +114,74 @@
         app:cornerRadius="10sp"
         android:paddingVertical="13dp"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/profile"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            android:background="#F8DAD0"
+            android:layout_margin="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#F8DAD0"
+                android:layout_height="match_parent"
+                android:padding="10sp"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_person_pin_24"
+                    android:backgroundTint="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zahra Davardoust"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="22dp"
+                    android:textColor="#0C5776"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:paddingHorizontal="55dp"
+                    android:text="edit"
+                    app:cornerRadius="15dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My orders"
+            android:textSize="22dp"
+            android:textColor="#001C44"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="35dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="75dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/recyclerview"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nurseapp.data.database.NurseEntity
+import com.example.nurseapp.data.database.OrderEntity
 import com.example.nurseapp.data.repository.AppRepository
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
@@ -16,7 +17,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     var categoryListLiveData = MutableLiveData<List<Category>>()
     var topNursesListLiveData = MutableLiveData<List<NurseEntity>>()
-    var specialNursesListLiveData = MutableLiveData<List<Nurse>>()
+    var specialNursesListLiveData = MutableLiveData<List<NurseEntity>>()
 
     fun setCategory(){
         viewModelScope.launch {
@@ -27,19 +28,32 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     fun setTopNurses() {
         viewModelScope.launch {
+            topNursesListLiveData.value = appRepository.getTopNurses().reversed()
+        }
+    }
+
+    fun getNursesOrderByEducation(education :String) {
+        viewModelScope.launch {
             topNursesListLiveData.value = appRepository.getTopNurses()
         }
     }
 
     fun getSpecialNurses() {
-//        viewModelScope.launch {
-//            specialNursesListLiveData.value = appRepository.getTopNurses()
-//        }
+        viewModelScope.launch {
+            specialNursesListLiveData.value = appRepository.getTopNurses()
+        }
     }
 
     fun setTestData() {
         viewModelScope.launch {
             appRepository.setTestData()
+        }
+    }
+
+    fun setTestOrder() {
+        viewModelScope.launch {
+            var a = OrderEntity(1,"ff" ,"20200.08.09", "1")
+            appRepository.insertOrder(a)
         }
     }
 }

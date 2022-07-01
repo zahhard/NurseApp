@@ -30,7 +30,8 @@ object AppModule {
     internal fun providesRetrofit(@ApplicationContext context: Context): AppDatabase {
         return Room
             .databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-            .fallbackToDestructiveMigration() // get correct db version if schema changed
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()// get correct db version if schema changed
             .build()
     }
 

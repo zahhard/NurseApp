@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_insideEachCategoryFragment"
+            app:destination="@id/insideEachCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -26,6 +29,29 @@
         tools:layout="@layout/fragment_inside_each_category" >
         <action
             android:id="@+id/action_insideEachCategoryFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRegisterFragment"
+        android:name="com.example.nurseapp.ui.user_register.UserRegisterFragment"
+        android:label="fragment_user_register"
+        tools:layout="@layout/fragment_user_register" >
+        <action
+            android:id="@+id/action_userRegisterFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.nurseapp.ui.user_register.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/allNursesFragment"
+        android:name="com.example.nurseapp.ui.inside_of_each_otem.AllNursesFragment"
+        android:label="fragment_all_nurses"
+        tools:layout="@layout/fragment_all_nurses" >
+        <action
+            android:id="@+id/action_allNursesFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

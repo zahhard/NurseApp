@@ -17,7 +17,7 @@ import com.example.nurseapp.R
 import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.model.Nurse
 
-class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfCategory) :
+class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfItem) :
     ListAdapter<NurseEntity, TopNursesAdapter.ViewHolder>(DiffCallback) {
 
 

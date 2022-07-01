@@ -19,7 +19,7 @@ import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
 
-class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfCategory) :
+class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfItem) :
     ListAdapter<NurseEntity, EachCategotyAdapter.ViewHolder>(DiffCallback) {
 
 
@@ -43,6 +43,8 @@ class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: s
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.title.text = getItem(position).fname
+        holder.education.text = getItem(position).education
+        holder.rating.rating = getItem(position).average_rate
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
         Glide.with(fragment)
             .load(getItem(position).image)

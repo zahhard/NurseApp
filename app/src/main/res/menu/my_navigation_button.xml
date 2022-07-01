@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/firstFragment"
+        <item android:id="@+id/userRegisterFragment"
             android:title="Profile"
             android:icon="@drawable/ic_baseline_person_24" />
         <item android:id="@+id/homeFragment"
             android:title="Home"
             android:icon="@drawable/ic_baseline_home_24" />
-        <item android:id="@+id/insideEachCategoryFragment"
+        <item android:id="@+id/allNursesFragment"
             android:title="nurses"
             android:icon="@drawable/ic_baseline_wheelchair_pickup_24" />
 

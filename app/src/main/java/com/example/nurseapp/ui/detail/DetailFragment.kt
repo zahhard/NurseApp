@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.nurseapp.adapter.CategoryAdapter
+import com.example.nurseapp.adapter.CommentAdapter
 import com.example.nurseapp.databinding.FragmentDetailBinding
 import com.example.nurseapp.model.InternetConnection
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,10 +41,25 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkInternetConnection()
+
+
+            detailViewModel.nurseCommentsLiveData.observe(viewLifecycleOwner) {
+            val manager = LinearLayoutManager(requireContext())
+            binding.recyclerview.layoutManager = manager
+            var adapter = CommentAdapter(this) {  }
+            adapter.submitList(it)
+            binding.recyclerview.adapter = adapter
+            binding.recyclerview.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL, false
+            )
+        }
+
     }
 
     private fun observeProduceItem() {
         detailViewModel.nurseItemLiveData.observe(viewLifecycleOwner) {
+            detailViewModel.getComments(it.nurseID)
             if (it != null) {
                 binding.tvDetailName.text = it.fname + " " + it.lname
             }
@@ -52,11 +70,11 @@ class DetailFragment : Fragment() {
                 .load(it.image)
                 .placeholder(android.R.drawable.ic_dialog_info)
                 .error(android.R.drawable.ic_dialog_alert)
-//            .apply(RequestOptions.circleCropTransform())
                 .transform(transformation)
                 .into(binding.image)
-//                binding.detailPrice.text = it.price
         }
+
+
     }
 
     private fun checkInternetConnection() {

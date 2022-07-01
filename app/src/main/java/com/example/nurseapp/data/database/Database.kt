@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 
-@Database(entities = [NurseEntity::class], version = 1)
+@Database(entities = [NurseEntity::class, UserEntity::class, OrderEntity::class, CommentEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun companyDao(): Dao

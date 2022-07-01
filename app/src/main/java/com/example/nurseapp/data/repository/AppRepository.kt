@@ -1,8 +1,7 @@
 package com.example.nurseapp.data.repository
 
 import androidx.lifecycle.LiveData
-import com.example.nurseapp.data.database.Dao
-import com.example.nurseapp.data.database.NurseEntity
+import com.example.nurseapp.data.database.*
 import com.example.nurseapp.model.Category
 import com.example.nurseapp.model.Nurse
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,12 +31,17 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         return categoryList
     }
 
-//    fun getTopNurses(): List<Nurse> {
-//        return nurseList
-//    }
 
-    fun getItemDetail(id: Int): Nurse {
-        return  nurseList[id]
+    suspend fun getComments(nurseId: Int): List<CommentEntity>{
+        return localDataSource.getComments(nurseId)
+    }
+
+    suspend fun getItemDetail(id: Int): NurseEntity {
+        return  localDataSource.getOneNurse(id)
+    }
+
+    suspend fun getUser(id: Int): UserEntity {
+        return  localDataSource.getOneUser(id)
     }
 
     suspend fun getNurses(): List<NurseEntity> {
@@ -48,5 +52,24 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         return localDataSource.getTopNurses()
     }
 
+    suspend fun insertUser(user : UserEntity){
+        return localDataSource.insertUser(user)
+    }
 
+    suspend fun insertOrder(orderEntity: OrderEntity ){
+        return localDataSource.insertOrder(orderEntity)
+    }
+
+    suspend fun getAllOrders(): List<OrderEntity>? {
+        return localDataSource.getAllOrders()
+    }
+
+
+    suspend fun getNursesOrderByEducation(education: String): List<NurseEntity> {
+        return localDataSource.getNursesOrderByEducation(education)
+    }
+
+    suspend fun search(search: String): List<NurseEntity> {
+        return localDataSource.search(search)
+    }
 }

@@ -1,22 +1,30 @@
 package com.example.nurseapp.ui.user_register
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.core.view.isGone
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.nurseapp.R
-import com.example.nurseapp.databinding.FragmentInsideEachCategoryBinding
+import com.example.nurseapp.data.database.UserEntity
 import com.example.nurseapp.databinding.FragmentUserRegisterBinding
-import com.example.nurseapp.ui.inside_of_each_otem.InsideEachCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.random.Random
+import kotlin.Int as Int1
 
 @AndroidEntryPoint
 class UserRegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentUserRegisterBinding
-    val userRegisterViewModel: UserRegisterViewModel by viewModels()
+    private val userRegisterViewModel: UserRegisterViewModel by viewModels()
+    lateinit var ppreferences: SharedPreferences
+    var userId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +41,33 @@ class UserRegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ppreferences = requireActivity().getSharedPreferences("is_registered", Context.MODE_PRIVATE)
+        registerOrProfile()
 
+        binding.login.setOnClickListener {
+            userId = Random(10000).nextInt()
+            val user = UserEntity(
+                userId,
+                binding.firstNme.text.toString(),
+                binding.lastName.text.toString(),
+                binding.phone.text.toString(),
+                binding.city.text.toString(),
+                binding.address.text.toString(),
+            )
+
+            userRegisterViewModel.insertUser(user)
+
+            val editor: SharedPreferences.Editor = ppreferences.edit()
+            editor.putBoolean("is_reg", true)
+            editor.apply()
+
+            registerOrProfile()
+        }
+    }
+
+    private fun registerOrProfile() {
+        if (ppreferences.getBoolean("is_reg", false) == true) {
+            findNavController().navigate(R.id.action_userRegisterFragment_to_profileFragment, bundleOf("userId" to userId))
+        }
     }
 }
