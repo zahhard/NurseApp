@@ -2,13 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ui.inside_of_each_otem.InsideEachCategoryFragment">
 
+
+   <RadioGroup
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_margin="10dp"
+       android:layout_height="wrap_content">
+
+      <RadioButton
+          android:id="@+id/bandage"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="12sp"
+          android:layout_weight="1"
+
+          android:text="Bandage" />
+
+      <RadioButton
+          android:id="@+id/baby"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="12sp"
+          android:layout_weight="1"
+
+          android:text="Baby care" />
+
+      <RadioButton
+          android:id="@+id/elderly"
+          android:layout_width="wrap_content"
+          android:textSize="12sp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:text="Elderly care" />
+
+      <RadioButton
+          android:id="@+id/rating"
+          android:layout_width="wrap_content"
+          android:textSize="12sp"
+          android:layout_height="wrap_content"
+          android:button="@drawable/ic_launcher_foreground"
+          android:layout_weight="1"
+          android:text="Rating" />
+   </RadioGroup>
+
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
        android:layout_margin="5dp"
+       android:button="@drawable/ic_launcher_foreground"
        android:id="@+id/recyclerview"/>
+
 
 </LinearLayout>

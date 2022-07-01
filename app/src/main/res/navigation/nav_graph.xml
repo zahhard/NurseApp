@@ -44,7 +44,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.nurseapp.ui.user_register.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_userRegisterFragment"
+            app:destination="@id/userRegisterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/allNursesFragment"
         android:name="com.example.nurseapp.ui.inside_of_each_otem.AllNursesFragment"

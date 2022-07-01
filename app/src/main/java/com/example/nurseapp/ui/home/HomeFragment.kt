@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -94,10 +95,11 @@ class HomeFragment : Fragment() {
             var adapter = CategoryAdapter(this) { id -> goToCategory(id) }
             adapter.submitList(it)
             binding.servicesRecyclerview.adapter = adapter
-            binding.servicesRecyclerview.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL, false
-            )
+//            binding.servicesRecyclerview.layoutManager = LinearLayoutManager(
+//                requireContext(),
+//                LinearLayoutManager.HORIZONTAL, false
+//            )
+            binding.servicesRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
         }
         homeViewModel.topNursesListLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())

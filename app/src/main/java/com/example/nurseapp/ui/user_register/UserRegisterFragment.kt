@@ -44,30 +44,32 @@ class UserRegisterFragment : Fragment() {
         ppreferences = requireActivity().getSharedPreferences("is_registered", Context.MODE_PRIVATE)
         registerOrProfile()
 
-        binding.login.setOnClickListener {
-            userId = Random(10000).nextInt()
-            val user = UserEntity(
-                userId,
-                binding.firstNme.text.toString(),
-                binding.lastName.text.toString(),
-                binding.phone.text.toString(),
-                binding.city.text.toString(),
-                binding.address.text.toString(),
-            )
-
-            userRegisterViewModel.insertUser(user)
-
-            val editor: SharedPreferences.Editor = ppreferences.edit()
-            editor.putBoolean("is_reg", true)
-            editor.apply()
-
-            registerOrProfile()
-        }
     }
 
     private fun registerOrProfile() {
         if (ppreferences.getBoolean("is_reg", false) == true) {
             findNavController().navigate(R.id.action_userRegisterFragment_to_profileFragment, bundleOf("userId" to userId))
+        }
+        else{
+            binding.login.setOnClickListener {
+                userId = Random(10000).nextInt()
+                val user = UserEntity(
+                    userId,
+                    binding.firstNme.text.toString(),
+                    binding.lastName.text.toString(),
+                    binding.phone.text.toString(),
+                    binding.city.text.toString(),
+                    binding.address.text.toString(),
+                )
+
+                userRegisterViewModel.insertUser(user)
+
+                val editor: SharedPreferences.Editor = ppreferences.edit()
+                editor.putBoolean("is_reg", true)
+                editor.apply()
+
+
+            }
         }
     }
 }
