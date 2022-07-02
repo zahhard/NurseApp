@@ -6,18 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.inside_of_each_otem.InsideEachCategoryFragment">
 
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:text="Filter:"
+      android:textSize="15dp"
+      android:textStyle="bold"
+       android:layout_marginTop="20dp"
+       android:layout_marginStart="15dp"
+      android:textColor="@color/black"/>
 
    <RadioGroup
+       android:id="@+id/radio_group"
        android:orientation="horizontal"
        android:layout_width="match_parent"
-       android:layout_margin="10dp"
+       android:layout_marginStart="10dp"
        android:layout_height="wrap_content">
 
       <RadioButton
           android:id="@+id/bandage"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:button="@drawable/ic_baseline_healing_24"
           android:textSize="12sp"
+          android:textColor="@color/black"
           android:layout_weight="1"
 
           android:text="Bandage" />
@@ -25,8 +37,10 @@
       <RadioButton
           android:id="@+id/baby"
           android:layout_width="wrap_content"
+          android:button="@drawable/ic_baseline_baby_changing_station_24"
           android:layout_height="wrap_content"
           android:textSize="12sp"
+          android:textColor="@color/black"
           android:layout_weight="1"
 
           android:text="Baby care" />
@@ -35,20 +49,35 @@
           android:id="@+id/elderly"
           android:layout_width="wrap_content"
           android:textSize="12sp"
+          android:textColor="@color/black"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:button="@drawable/ic_baseline_elderly_24"
           android:orientation="vertical"
+
+
           android:text="Elderly care" />
 
       <RadioButton
           android:id="@+id/rating"
           android:layout_width="wrap_content"
           android:textSize="12sp"
+          android:textColor="@color/black"
           android:layout_height="wrap_content"
-          android:button="@drawable/ic_launcher_foreground"
+          android:button="@drawable/ic_baseline_star_rate_24"
           android:layout_weight="1"
           android:text="Rating" />
+
    </RadioGroup>
+
+
+   <View
+       android:id="@+id/divider"
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:layout_marginTop="5dp"
+       android:layout_marginHorizontal="10dp"
+       android:background="?android:attr/listDivider" />
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"

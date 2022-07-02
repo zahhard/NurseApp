@@ -17,6 +17,7 @@ class InsideEachCategoryViewModel @Inject constructor(var appRepository: AppRepo
     var nursesListLiveData = MutableLiveData<List<NurseEntity>>()
     var nurseItemLiveData = MutableLiveData<Nurse>()
     var nurseCommentsLiveData = MutableLiveData<List<Comment>>()
+    var filter = MutableLiveData<String>()
 
     fun getItemDetail(id: String) {
         viewModelScope.launch {
@@ -33,6 +34,27 @@ class InsideEachCategoryViewModel @Inject constructor(var appRepository: AppRepo
     fun search(search: String) {
         viewModelScope.launch {
             nursesListLiveData.value = appRepository.search(search)
+        }
+    }
+
+    fun filter (search :String, filter :String ){
+
+
+        if (filter == "Top"){
+            viewModelScope.launch {
+
+                nursesListLiveData.value = appRepository.getTopNursesForFilter(search).reversed()
+            }
+        }
+        else if (filter == "Baby care" || filter == "Elderly care" || filter == "Bandage"){
+            viewModelScope.launch {
+                nursesListLiveData.value = appRepository.filter(search, filter)
+            }
+        }
+        else{
+            viewModelScope.launch {
+                nursesListLiveData.value = appRepository.search(search)
+            }
         }
     }
 

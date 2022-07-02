@@ -72,4 +72,13 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
     suspend fun search(search: String): List<NurseEntity> {
         return localDataSource.search(search)
     }
+
+    suspend fun filter(search: String, filter: String): List<NurseEntity> {
+        return localDataSource.filter(search, filter)
+    }
+
+
+    suspend fun getTopNursesForFilter(search: String): List<NurseEntity> {
+        return localDataSource.getTopNursesForFilter(search)
+    }
 }

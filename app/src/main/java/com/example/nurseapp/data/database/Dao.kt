@@ -52,6 +52,10 @@ interface Dao {
     suspend fun getTopNurses(): List<NurseEntity>
 
 
+    @Query("SELECT * FROM NurseEntity WHERE lname LIKE '%' || :search || '%' OR fname LIKE '%' || :search || '%' OR education LIKE '%' || :search || '%' OR phone LIKE '%' || :search || '%' ORDER BY NurseEntity.average_rate ")
+    suspend fun getTopNursesForFilter(search: String): List<NurseEntity>
+
+
     @Query("SELECT * FROM OrderEntity")
     suspend fun getAllOrders(): List<OrderEntity>?
 
@@ -74,5 +78,13 @@ interface Dao {
                 " OR phone LIKE '%' || :search || '%'"
     )
     suspend fun search(search: String): List<NurseEntity>
+
+
+    @Query(
+        "SELECT * FROM NurseEntity WHERE lname LIKE '%' || :search || '%'" +
+        " OR fname LIKE '%' || :search || '%'" +
+                " OR education LIKE '%' || :search || '%'" +
+                " OR phone LIKE '%' || :search || '%' AND education LIKE '%' || :filter " )
+    suspend fun filter(search: String, filter: String): List<NurseEntity>
 
 }

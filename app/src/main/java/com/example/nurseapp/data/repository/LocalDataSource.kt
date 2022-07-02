@@ -28,11 +28,11 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
 
     suspend fun setTestData() {
         appDatabase.companyDao().insertAll(
-            NurseEntity(1,1,"1", "Davardoust", "09558741259", 5F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(2,2,"2", "Farahani", "09558741259", 4F, "general care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(3,3,"3", "Davardoust", "09558741259", 3F, "bandage", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(4,4,"4", "Davardoust", "09558741259", 2F, "Elderly care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(5,5,"5", "Davardoust", "09558741259", 1F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(1,1,"1", "Davardoust", "09558741259", 2F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(2,2,"2", "Farahani", "09558741259", 5F, "general care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(3,3,"3", "Davardoust", "09558741259", 8F, "bandage", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(4,4,"4", "Davardoust", "09558741259", 1F, "Elderly care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(5,5,"5", "Davardoust", "09558741259", 3F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
         )
         appDatabase.companyDao().insertOrder(
             OrderEntity(1,"bandage","2022.01.01", "Nursea00"),
@@ -75,7 +75,15 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
         return appDatabase.companyDao().getOneUser(id)
     }
 
+    suspend fun getTopNursesForFilter(search: String): List<NurseEntity> {
+        return appDatabase.companyDao().getTopNursesForFilter(search)
+    }
+
     suspend fun search(search: String): List<NurseEntity> {
         return appDatabase.companyDao().search(search)
+    }
+
+    suspend fun filter(search: String, filter: String): List<NurseEntity> {
+        return appDatabase.companyDao().filter(search, filter)
     }
 }
