@@ -29,4 +29,10 @@ class DetailViewModel @Inject constructor(var appRepository: AppRepository) :Vie
             nurseCommentsLiveData.value = appRepository.getComments(nurseId)
         }
     }
+
+    fun insertOneComment(commentEntity: CommentEntity){
+        viewModelScope.launch {
+            appRepository.insertOneComment(commentEntity)
+        }
+    }
 }

@@ -35,10 +35,10 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
             NurseEntity(5,5,"5", "Davardoust", "09558741259", 3F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
         )
         appDatabase.companyDao().insertOrder(
-            OrderEntity(1,"bandage","2022.01.01", "Nursea00"),
-            OrderEntity(2,"baby care","2023.01.01", "Nursea01"),
-            OrderEntity(3,"general care","2024.01.01", "Nursea02"),
-            OrderEntity(4,"bandage","2025.01.01", "Nursea03"),
+            OrderEntity(1,173285739,0,"2022.05.6",5,),
+            OrderEntity(2,173285739,1, "2022.05.6",3),
+            OrderEntity(3,173285739, 2, "2022.05.6",4),
+            OrderEntity(4,173285739,3, "2022.05.6",1),
         )
         appDatabase.companyDao().insertComment(
             CommentEntity(0, 1, "very good1", "2020.05.1", "Farid1"),
@@ -54,8 +54,12 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
         )
     }
 
-    suspend fun getAllOrders(): List<OrderEntity>? {
-        return appDatabase.companyDao().getAllOrders()
+    suspend fun getAllOrdersForUser(id:  Int): List<OrderEntity>? {
+        return appDatabase.companyDao().getAllOrdersForUser(id)
+    }
+
+    suspend fun getAllOrdersForNurse(id:  Int): List<OrderEntity>? {
+        return appDatabase.companyDao().getAllOrdersForNurse(id)
     }
 
 
@@ -85,5 +89,13 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
 
     suspend fun filter(search: String, filter: String): List<NurseEntity> {
         return appDatabase.companyDao().filter(search, filter)
+    }
+
+    suspend fun insertOneComment(comment: CommentEntity) {
+        return appDatabase.companyDao().insertComment(comment)
+    }
+
+    suspend fun insertNurse(nurseEntity: NurseEntity) {
+        appDatabase.companyDao().insertAll(nurseEntity)
     }
 }

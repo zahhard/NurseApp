@@ -3,6 +3,7 @@ package com.example.nurseapp.ui.user_register
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.data.database.OrderEntity
 import com.example.nurseapp.data.database.UserEntity
 import com.example.nurseapp.data.repository.AppRepository
@@ -23,10 +24,31 @@ class UserRegisterViewModel  @Inject constructor(var appRepository: AppRepositor
         }
     }
 
-
-    fun getAllOrders(){
+    fun insertNurse(nurseEntity: NurseEntity){
         viewModelScope.launch {
-            orderListLiveData.value = appRepository.getAllOrders()
+            appRepository.insertNurse(nurseEntity)
+        }
+    }
+
+
+    fun getAllOrders(id: Int, type: String){
+
+        if (type == "user"){
+            viewModelScope.launch {
+                orderListLiveData.value = appRepository.getAllOrdersForUser(id)
+            }
+        }
+        if (type == "nurse"){
+            viewModelScope.launch {
+                orderListLiveData.value = appRepository.getAllOrdersForNurse(id)
+            }
+        }
+    }
+
+
+    fun getAllOrdersForUser(id: Int){
+        viewModelScope.launch {
+            orderListLiveData.value = appRepository.getAllOrdersForUser(id)
         }
     }
 

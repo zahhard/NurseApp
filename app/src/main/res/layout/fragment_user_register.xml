@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".ui.user_register.UserRegisterFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -104,7 +108,87 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:id="@+id/redio"
+            android:layout_height="wrap_content">
+
+
+            <RadioButton
+                android:id="@+id/nurse"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nurse" />
+
+            <RadioButton
+                android:id="@+id/user"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:visibility="gone"
+            android:id="@+id/radio_group"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/bandage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_baseline_healing_24"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+
+                android:text="Bandage" />
+
+            <RadioButton
+                android:id="@+id/baby"
+                android:layout_width="wrap_content"
+                android:button="@drawable/ic_baseline_baby_changing_station_24"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+
+                android:text="Baby care" />
+
+            <RadioButton
+                android:id="@+id/elderly"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@drawable/ic_baseline_elderly_24"
+                android:orientation="vertical"
+
+
+                android:text="Elderly care" />
+
+            <RadioButton
+                android:id="@+id/general"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_baseline_star_rate_24"
+                android:layout_weight="1"
+                android:text="General care" />
+
+        </RadioGroup>
+
+
+        <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login"
@@ -114,74 +198,13 @@
         app:cornerRadius="10sp"
         android:paddingVertical="13dp"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/profile"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="25dp"
-            android:background="#F8DAD0"
-            android:layout_margin="30dp">
+            android:layout_height="match_parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:background="#F8DAD0"
-                android:layout_height="match_parent"
-                android:padding="10sp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_person_pin_24"
-                    android:backgroundTint="@color/black"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zahra Davardoust"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="22dp"
-                    android:textColor="#0C5776"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:paddingHorizontal="55dp"
-                    android:text="edit"
-                    app:cornerRadius="15dp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My orders"
-            android:textSize="22dp"
-            android:textColor="#001C44"
-            android:textStyle="bold"
-            android:layout_marginBottom="15dp"
-            android:layout_marginStart="35dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="75dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:id="@+id/recyclerview"/>
 
     </LinearLayout>
 
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

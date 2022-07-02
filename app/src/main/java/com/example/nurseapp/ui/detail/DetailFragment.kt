@@ -1,9 +1,15 @@
 package com.example.nurseapp.ui.detail
 
+import android.app.AlertDialog.THEME_HOLO_LIGHT
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
+import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.nurseapp.adapter.CategoryAdapter
 import com.example.nurseapp.adapter.CommentAdapter
 import com.example.nurseapp.databinding.FragmentDetailBinding
 import com.example.nurseapp.model.InternetConnection
@@ -56,6 +61,16 @@ class DetailFragment : Fragment() {
         }
 
     }
+
+
+
+
+
+
+
+
+
+
 
     private fun observeProduceItem() {
         detailViewModel.nurseItemLiveData.observe(viewLifecycleOwner) {

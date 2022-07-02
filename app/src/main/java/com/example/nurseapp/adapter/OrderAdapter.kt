@@ -38,9 +38,9 @@ class OrderAdapter(var fragment: Fragment, private var showFilmDetails: showInsi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.nurseName.text = getItem(position).nurse
-        holder.order.text = getItem(position).orderName
-        holder.date.text = getItem(position).date
+//        holder.nurseName.text = getItem(position).nurse
+        holder.order.text = getItem(position).start_time
+        holder.date.text = getItem(position).day_count.toString()
 
 
         holder.itemView.setOnClickListener {

@@ -60,8 +60,12 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         return localDataSource.insertOrder(orderEntity)
     }
 
-    suspend fun getAllOrders(): List<OrderEntity>? {
-        return localDataSource.getAllOrders()
+    suspend fun getAllOrdersForNurse(id: Int): List<OrderEntity>? {
+        return localDataSource.getAllOrdersForNurse(id)
+    }
+
+    suspend fun getAllOrdersForUser(id: Int): List<OrderEntity>? {
+        return localDataSource.getAllOrdersForUser(id)
     }
 
 
@@ -80,5 +84,13 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
 
     suspend fun getTopNursesForFilter(search: String): List<NurseEntity> {
         return localDataSource.getTopNursesForFilter(search)
+    }
+
+    suspend fun insertOneComment(comment: CommentEntity) {
+        return localDataSource.insertOneComment(comment)
+    }
+
+    suspend fun insertNurse(nurseEntity: NurseEntity) {
+        localDataSource.insertNurse(nurseEntity)
     }
 }

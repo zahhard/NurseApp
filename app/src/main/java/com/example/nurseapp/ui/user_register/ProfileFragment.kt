@@ -1,5 +1,7 @@
 package com.example.nurseapp.ui.user_register
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     val userRegisterViewModel: UserRegisterViewModel by viewModels()
+    lateinit var ppreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,22 +41,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var userId = requireArguments().getInt("userId", 0)
+//        var userId = requireArguments().getInt("userId", 0)
 
+        ppreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
+        var id = requireArguments().getInt("id", -1)
+        binding.name.text = ppreferences.getString("name", "")
+        var type = ppreferences.getString("as", "")
 
-        if (userId != 0) {
-            userRegisterViewModel.getUser(userId)
-            userRegisterViewModel.getAllOrders()
-            userRegisterViewModel.UserLiveData.observe(viewLifecycleOwner) {
-                binding.name.text = it.name + " " + it.lname
-            }
-        }
-        else{
-            findNavController().navigate(R.id.action_profileFragment_to_userRegisterFragment)
-            Toast.makeText(requireContext(), "You don't have any account!", Toast.LENGTH_SHORT).show()
+        if (type != ""){
+            userRegisterViewModel.getAllOrders(id, type!!)
         }
 
-        userRegisterViewModel.orderListLiveData.observe(viewLifecycleOwner) {
+        userRegisterViewModel.orderListLiveData.observe(viewLifecycleOwner){
             val manager = LinearLayoutManager(requireContext())
             binding.recyclerview.layoutManager = manager
             var adapter = OrderAdapter(this) { }
@@ -61,5 +60,28 @@ class ProfileFragment : Fragment() {
             binding.recyclerview.adapter = adapter
             binding.recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
         }
+
+//        if (userId != 0) {
+//            userRegisterViewModel.getUser(userId)
+//            userRegisterViewModel.getAllOrders()
+//            userRegisterViewModel.UserLiveData.observe(viewLifecycleOwner) {
+//                binding.name.text = it.name + " " + it.lname
+//            }
+//        }
+//        else{
+//            findNavController().navigate(R.id.action_profileFragment_to_userRegisterFragment)
+//            Toast.makeText(requireContext(), "You don't have any account!", Toast.LENGTH_SHORT).show()
+////        }
+//
+//        userRegisterViewModel.orderListLiveData.observe(viewLifecycleOwner) {
+//            val manager = LinearLayoutManager(requireContext())
+//            binding.recyclerview.layoutManager = manager
+//            var adapter = OrderAdapter(this) { }
+//            adapter.submitList(it)
+//            binding.recyclerview.adapter = adapter
+//            binding.recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+//        }
+
+
     }
 }

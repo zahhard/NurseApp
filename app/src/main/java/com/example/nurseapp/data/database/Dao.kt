@@ -56,8 +56,12 @@ interface Dao {
     suspend fun getTopNursesForFilter(search: String): List<NurseEntity>
 
 
-    @Query("SELECT * FROM OrderEntity")
-    suspend fun getAllOrders(): List<OrderEntity>?
+    @Query("SELECT * FROM OrderEntity WHERE userId LIKE :userId")
+    suspend fun getAllOrdersForUser(userId : Int): List<OrderEntity>?
+
+
+    @Query("SELECT * FROM OrderEntity WHERE nurseId LIKE :nurseId")
+    suspend fun getAllOrdersForNurse(nurseId : Int): List<OrderEntity>?
 
 
     @Query("SELECT * FROM CommentEntity WHERE nurseId LIKE :nurseId")

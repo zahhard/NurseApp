@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class NurseEntity (
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    var nurseID : Int = 0,
+    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var nurseID : Int = 0,
     var fname : String = "",
     var lname: String = "f",
 //    `birthdate` DATE NOT NULL,
@@ -24,5 +24,5 @@ data class NurseEntity (
 //    `visit` INT NOT NULL,
 //    `startdate` DATE NOT NULL,
 //    `endofreserve` DATE NOt NULL,
-    var image : String = ""
+    var image : String = "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"
 )
