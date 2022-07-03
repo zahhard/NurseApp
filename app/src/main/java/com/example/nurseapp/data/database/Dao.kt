@@ -77,9 +77,7 @@ interface Dao {
 
     @Query(
         "SELECT * FROM NurseEntity WHERE lname LIKE '%' || :search || '%'" +
-                " OR fname LIKE '%' || :search || '%'" +
-                " OR education LIKE '%' || :search || '%'" +
-                " OR phone LIKE '%' || :search || '%'"
+                " OR fname LIKE '%' || :search || '%'"
     )
     suspend fun search(search: String): List<NurseEntity>
 

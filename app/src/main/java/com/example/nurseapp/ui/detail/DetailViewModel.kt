@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nurseapp.data.database.CommentEntity
 import com.example.nurseapp.data.database.NurseEntity
+import com.example.nurseapp.data.database.OrderEntity
 import com.example.nurseapp.data.repository.AppRepository
 import com.example.nurseapp.model.Comment
 import com.example.nurseapp.model.Nurse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(var appRepository: AppRepository) :ViewModel() {
@@ -33,6 +35,13 @@ class DetailViewModel @Inject constructor(var appRepository: AppRepository) :Vie
     fun insertOneComment(commentEntity: CommentEntity){
         viewModelScope.launch {
             appRepository.insertOneComment(commentEntity)
+        }
+    }
+
+    fun setOrder(date: String, dayCount: Int, nurseId: Int, userId: Int) {
+        viewModelScope.launch {
+            var order = OrderEntity(Random(1500).nextInt(), userId, nurseId , date, dayCount )
+            appRepository.setOrder(order)
         }
     }
 }

@@ -7,19 +7,18 @@ import com.example.nurseapp.data.database.NurseEntity
 import com.example.nurseapp.data.database.OrderEntity
 import com.example.nurseapp.data.repository.AppRepository
 import com.example.nurseapp.model.Category
-import com.example.nurseapp.model.Nurse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : ViewModel() {
+class HomeViewModel @Inject constructor(var appRepository: AppRepository) : ViewModel() {
 
     var categoryListLiveData = MutableLiveData<List<Category>>()
     var topNursesListLiveData = MutableLiveData<List<NurseEntity>>()
-    var specialNursesListLiveData = MutableLiveData<List<NurseEntity>>()
+    var specialNursesListLiveData = MutableLiveData<List<String>>()
 
-    fun setCategory(){
+    fun setCategory() {
         viewModelScope.launch {
             categoryListLiveData.value = appRepository.setCategory()
         }
@@ -32,7 +31,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
         }
     }
 
-    fun getNursesOrderByEducation(education :String) {
+    fun getNursesOrderByEducation(education: String) {
         viewModelScope.launch {
             topNursesListLiveData.value = appRepository.getTopNurses()
         }
@@ -40,7 +39,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     fun getSpecialNurses() {
         viewModelScope.launch {
-            specialNursesListLiveData.value = appRepository.getTopNurses()
+            specialNursesListLiveData.value = appRepository.getSpecial()
         }
     }
 
@@ -52,7 +51,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository)  : Vie
 
     fun setTestOrder() {
         viewModelScope.launch {
-            var a = OrderEntity(1,5,0,"20200.08.09" ,1)
+            var a = OrderEntity(1, 5, 0, "20200.08.09", 1)
             appRepository.insertOrder(a)
         }
     }

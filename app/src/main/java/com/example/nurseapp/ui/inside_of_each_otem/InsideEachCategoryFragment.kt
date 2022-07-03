@@ -53,19 +53,19 @@ class InsideEachCategoryFragment : Fragment() {
             binding.radioGroup.setOnCheckedChangeListener { radioGroup, i ->
 
                 if (i == R.id.baby) {
-                    filter = "Baby care"
+                    filter = "baby care"
                 }
                 if (i == R.id.elderly) {
-                    filter = "Elderly care"
+                    filter = "elderly care"
                 }
                 if (i == R.id.bandage) {
-                    filter = "Bandage"
+                    filter = "bandage"
                 }
                 if (i == R.id.rating) {
-                    filter = "Top"
+                    filter = "top"
                 }
                 insideEachCategoryViewModel.filter(search, filter)
-                Toast.makeText(requireContext(), "$search / $filter" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "$filter" , Toast.LENGTH_SHORT).show()
             }
 
 

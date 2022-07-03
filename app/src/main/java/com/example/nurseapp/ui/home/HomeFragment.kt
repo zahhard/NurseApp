@@ -45,10 +45,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var banerList = arrayListOf<String>(
+            "https://blog.hopihari.com.br/wp-content/uploads/2020/04/banner-horadeagradecer-1800x900.jpg",
+            "https://mncyn.ca/wp-content/uploads/2020/09/WHO-Year_of_Nurse-and-Midwife-2020.jpg",
+        "https://newslab.com.br/wp-content/uploads/2020/04/profissionais-de-saude-shutterstock.png")
 //
         homeViewModel.setTestOrder()
         homeViewModel.setTestData()
         checkInternetConnection()
+
+
+        val pagerPadding = 16
+        binding.viewPagerImageSlider.setClipToPadding(false)
+        binding.viewPagerImageSlider.setPadding(pagerPadding, 0, pagerPadding, 0)
 
         binding.imageButton.setOnClickListener {
             if ( !binding.search.text.isNullOrBlank() ) {
@@ -116,7 +126,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.specialNursesListLiveData.observe(viewLifecycleOwner) {
             for (nurse in it) {
-                listOfImages.add(nurse.image)
+                listOfImages.add(nurse)
             }
             binding.viewPagerImageSlider.adapter =
                 SliderAdapter(this, listOfImages, binding.viewPagerImageSlider)

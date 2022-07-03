@@ -26,6 +26,7 @@ class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: s
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         val imageViewItemCategory: ImageView = view.findViewById<ImageView>(R.id.item_category)
+        val imageView: ImageView = view.findViewById<ImageView>(R.id.image_view_edication)
         //        val  cardView = view.findViewById<CardView>(R.id.cardView)
         val title: TextView = view.findViewById<TextView>(R.id.item_name)
         val education: TextView = view.findViewById<TextView>(R.id.education)
@@ -42,7 +43,7 @@ class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: s
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.title.text = getItem(position).fname
+        holder.title.text = getItem(position).fname + " " + getItem(position).lname
         holder.education.text = getItem(position).education
         holder.rating.rating = getItem(position).average_rate
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
@@ -53,6 +54,35 @@ class EachCategotyAdapter(var fragment: Fragment, private var showFilmDetails: s
 //            .apply(RequestOptions.circleCropTransform())
             .transform(transformation)
             .into(holder.imageViewItemCategory)
+
+        if (getItem(position).education == "baby care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/fluency/344/mother-room.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).education == "elderly care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/344/elderly-person.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).education == "general care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/2x/examination.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).education == "bandage"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/2x/cast.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
 
 
         holder.itemView.setOnClickListener {

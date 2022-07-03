@@ -23,16 +23,32 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
     suspend fun insertOrder(order : OrderEntity){
          return appDatabase.companyDao().insertOrder(order)
     }
+ //   https://www.who.int/images/default-source/health-topics/nursing/nursing-jamaica/treciacrop.png?sfvrsn=390763b_4
 
+
+    //// baby care ////  https://img.icons8.com/fluency/344/mother-room.png
+    //// general care ////  https://img.icons8.com/cotton/344/spa-care.png
+    //// elderly care ////  https://img.icons8.com/color/344/elderly-person.png
 
 
     suspend fun setTestData() {
         appDatabase.companyDao().insertAll(
-            NurseEntity(1,1,"1", "Davardoust", "09558741259", 2F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(2,2,"2", "Farahani", "09558741259", 5F, "general care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(3,3,"3", "Davardoust", "09558741259", 8F, "bandage", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(4,4,"4", "Davardoust", "09558741259", 1F, "Elderly care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
-            NurseEntity(5,5,"5", "Davardoust", "09558741259", 3F, "baby care", "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"),
+            NurseEntity(1,1,"Janis", "Joplin", "09558741259", 2F, "baby care", "https://nurseweek.com/wp-content/uploads/2021/08/SEO-783-bs-Portrait-of-a-smiling-nurse-168968912-1200x675-1.jpg"),
+            NurseEntity(2,2,"Jennifer", "Aniston", "09558741259", 5F, "general care", "https://st.focusedcollection.com/19002158/i/650/focused_224031048-stock-photo-portrait-smiling-female-nurse-standing.jpg"),
+            NurseEntity(3,3,"John", "Barrowman", "09558741259", 8F, "bandage", "https://ak.picdn.net/shutterstock/videos/15902578/thumb/1.jpg"),
+            NurseEntity(4,4,"Daniella", "Westbrook", "09558741259", 1F, "elderly care", "https://thevideoink.com/wp-content/uploads/2021/11/wysiwyg-uploads_1569586526901-doctor.jpg"),
+            NurseEntity(5,5,"Sarah", "Conner", "09558741259", 3F, "baby care", "https://topperacademygroupofinstitutions.com/wp-content/uploads/2020/12/female-nurse.jpg"),
+            NurseEntity(6,6,"James", "Blake", "09558741259", 3F, "elderly care", "https://www.eatthis.com/wp-content/uploads/sites/4/2021/09/doctors-face-mask-hospital.jpg?quality=82&strip=1"),
+            NurseEntity(7,7,"Ali", "Babakhanlu", "09558741259", 3F, "general care", "https://ak.picdn.net/shutterstock/videos/1048920514/thumb/1.jpg"),
+            NurseEntity(8,8,"Zahra", "Davardoust", "09558741259", 3F, "bandage", "https://www.ecpi.edu/sites/default/files/Nursing%20Sept%2027.png"),
+            NurseEntity(9,9,"Ahmet", "Kaya", "09558741259", 3F, "baby care", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxc390YnqIN5Rtfo7MvaMPEfrARIJL2MiDhQ&usqp=CAU"),
+            NurseEntity(10,10,"Nazanin", "Akbari", "09558741259", 3F, "elderly care", "https://www.nurse.com/blog/wp-content/uploads/2019/03/what_makes_good_nurse.jpg"),
+            NurseEntity(11,11,"Amir", "Jahani", "09558741259", 3F, "ganeral care", "https://static01.nyt.com/images/2020/03/26/nyregion/26nyvirus-nurse/26nyvirus-nurse-mediumSquareAt3X.jpg"),
+            NurseEntity(12,12,"Fatemeh", "Mahmodi", "09558741259", 3F, "bandage", "https://dm1zcrsul8wju.cloudfront.net/sites/rcn_nspace/files/styles/tile_image/public/Article-images/184316/31954.jpeg?itok=Rmzb-Wni"),
+            NurseEntity(13,13,"Hamid", "Hamidi", "09558741259", 3F, "bandage", "https://higherlogicdownload.s3.amazonaws.com/NASN/8575d1b7-94ad-45ab-808e-d45019cc5c08/UploadedImages/Hero_Images/SLV-Vaccines.png"),
+            NurseEntity(14,14,"Mohammad", "Nouri", "09558741259", 3F, "general care", "https://onlinenursing.cn.edu/sites/default/files/cn-2021-nursing-trends-11-600x400.jpg"),
+            NurseEntity(15,15,"Sina", "gholizadeh", "09558741259", 3F, "baby care", "https://www.eatthis.com/wp-content/uploads/sites/4/2021/12/doctor-face-mask-hospital.jpg?quality=82&strip=all"),
+            NurseEntity(16,16,"Mohsen", "Badali", "09558741259", 3F, "elderly care", "https://www.waldenu.edu/-/media/walden/images/seo-article/seo-662-bs-healthcare-people-group-profe-294762073-1200x675.jpg?rev=332db21ba2204fcead5a558d2bab91f0&hash=B97575BB15C2BB8093057C34E8EAD1D5"),
         )
         appDatabase.companyDao().insertOrder(
             OrderEntity(1,173285739,0,"2022.05.6",5,),
@@ -97,5 +113,9 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
 
     suspend fun insertNurse(nurseEntity: NurseEntity) {
         appDatabase.companyDao().insertAll(nurseEntity)
+    }
+
+    suspend fun setOrder(order: OrderEntity) {
+        appDatabase.companyDao().insertOrder(order)
     }
 }

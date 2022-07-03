@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
@@ -25,6 +26,7 @@ class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: show
         val imageViewItemCategory: ImageView = view.findViewById<ImageView>(R.id.rounded_image)
         val education = view.findViewById<TextView>(R.id.education_name)
         val name: TextView = view.findViewById<TextView>(R.id.person_name)
+        val rate: RatingBar = view.findViewById(R.id.rating)
     }
 
 
@@ -39,6 +41,7 @@ class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: show
 
         holder.name.text = getItem(position).fname
         holder.education.text = getItem(position).education
+        holder.rate.rating = getItem(position).average_rate
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
         Glide.with(fragment)
             .load(getItem(position).image)

@@ -15,11 +15,24 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
         localDataSource.setTestData()
     }
 
+
+
+
+    //// bandage /// https://img.icons8.com/external-flatarticons-blue-flatarticons/452/external-bandage-camping-flatarticons-blue-flatarticons.png
+    //// bandage /// https://img.icons8.com/officel/452/cast.png
+
+
+
     var categoryList = arrayListOf<Category>(
-        Category(0, "Baby care", "https://cdn.cdnparenting.com/articles/2018/10/1022205187-H-768x525.jpg" ),
-        Category(1, "Elderly care", "https://www.soundguys.com/wp-content/uploads/2021/08/Man-Wearing-ITE-Hearing-Aid-in-Right-Ear.jpg" ),
-        Category(2, "Bandage", "https://www.easthillsmedicalcentre.com.au/wp-content/uploads/2022/01/shutterstock_250798189-1-1.jpg" ),
-        Category(3, "General care", "https://saviorhomecare.com/wp-content/uploads/2021/08/page2.jpeg" ))
+        Category(0, "Baby care", "https://img.icons8.com/fluency/344/mother-room.png" ),
+        Category(1, "Elderly care", "https://img.icons8.com/color/344/elderly-person.png" ),
+        Category(2, "Bandage", "https://img.icons8.com/color/2x/cast.png" ),
+        Category(3, "General care", "https://img.icons8.com/color/2x/examination.png" ))
+
+    var banerList = arrayListOf<String>(
+        "https://blog.hopihari.com.br/wp-content/uploads/2020/04/banner-horadeagradecer-1800x900.jpg",
+        "https://mncyn.ca/wp-content/uploads/2020/09/WHO-Year_of_Nurse-and-Midwife-2020.jpg",
+        "https://newslab.com.br/wp-content/uploads/2020/04/profissionais-de-saude-shutterstock.png")
 
     var nurseList = arrayListOf<Nurse>(
         Nurse(0, "nana", "rahimi" , 5.6F,"bandage","https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000" ),
@@ -50,6 +63,10 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
 
     suspend fun getTopNurses(): List<NurseEntity>{
         return localDataSource.getTopNurses()
+    }
+
+    suspend fun getSpecial(): List<String>{
+        return banerList
     }
 
     suspend fun insertUser(user : UserEntity){
@@ -92,5 +109,9 @@ class AppRepository  @Inject constructor(val localDataSource: LocalDataSource,
 
     suspend fun insertNurse(nurseEntity: NurseEntity) {
         localDataSource.insertNurse(nurseEntity)
+    }
+
+    suspend fun setOrder(orderEntity: OrderEntity) {
+        localDataSource.setOrder(orderEntity)
     }
 }

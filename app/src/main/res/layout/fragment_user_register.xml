@@ -194,7 +194,8 @@
         android:id="@+id/login"
         android:text="register"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginTop="10dp"
+            android:layout_marginBottom="100dp"
         app:cornerRadius="10sp"
         android:paddingVertical="13dp"/>
 
