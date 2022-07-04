@@ -21,7 +21,11 @@
         android:id="@+id/detailFragment"
         android:name="com.example.nurseapp.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/insideEachCategoryFragment"
         android:name="com.example.nurseapp.ui.inside_of_each_otem.InsideEachCategoryFragment"
@@ -61,4 +65,9 @@
             android:id="@+id/action_allNursesFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.example.nurseapp.ui.detail.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" />
 </navigation>

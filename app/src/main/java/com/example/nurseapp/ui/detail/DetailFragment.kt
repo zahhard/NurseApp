@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.nurseapp.R
 import com.example.nurseapp.adapter.CommentAdapter
 import com.example.nurseapp.data.database.CommentEntity
 import com.example.nurseapp.databinding.FragmentDetailBinding
@@ -73,22 +76,23 @@ class DetailFragment : Fragment() {
 
         if (ppreferences.getInt("id", -1) != -1) {
             binding.submit.setOnClickListener {
-                if (!binding.date.text.isNullOrBlank() && !binding.dayCount.text.isNullOrBlank()) {
-                    detailViewModel.setOrder(
-                        binding.date.text.toString(),
-                        binding.dayCount.text.toString().toInt(),
-                        nurseId,
-                        ppreferences.getInt("id", -1),
-                    )
-                    Toast.makeText(requireContext(), "dddddd", Toast.LENGTH_SHORT).show()
-                }
+
+
+
+                var bundle = bundleOf(
+                    "date" to binding.date.text.toString(),
+                    "day_count" to binding.dayCount.text.toString().toInt(),
+                    "nurse" to nurseId,
+                    "user" to ppreferences.getInt("id", -1)
+                )
+
+                findNavController().navigate(R.id.action_detailFragment_to_commentFragment, bundle)
+
+
+
+
             }
         }
-        else{
-            Toast.makeText(requireContext(), "errorororor", Toast.LENGTH_SHORT).show()
-
-        }
-
     }
 
 
