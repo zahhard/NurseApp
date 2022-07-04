@@ -45,7 +45,7 @@ class UserRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ppreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
-
+        goToProfile()
         binding.redio.setOnCheckedChangeListener { radioGroup, i ->
             if (i == R.id.nurse) {
                 type = "nurse"
@@ -74,7 +74,7 @@ class UserRegisterFragment : Fragment() {
         }
 
         binding.login.setOnClickListener {
-            userId = Random(10000).nextInt()
+            userId = Random.nextInt(0, 1000)
 
             if (type == "user"){
                 val user = UserEntity(
@@ -89,7 +89,7 @@ class UserRegisterFragment : Fragment() {
             }
             else if (type == "nurse"){
                 val nurse = NurseEntity(
-                    id = 0,
+                    userId,
                     userId,
                     binding.firstNme.text.toString(),
                     binding.lastName.text.toString(),
@@ -106,6 +106,7 @@ class UserRegisterFragment : Fragment() {
 
             val editor: SharedPreferences.Editor = ppreferences.edit()
             editor.putString("name", name)
+            editor.putInt("id", userId)
             editor.putString("as", type)
             editor.apply()
             Toast.makeText(requireContext(), "dddd", Toast.LENGTH_SHORT).show()
@@ -116,7 +117,7 @@ class UserRegisterFragment : Fragment() {
     }
 
     private fun goToProfile() {
-        if (ppreferences.getString("name", "") != "") {
+        if (  ppreferences.getInt("id", -1) != -1) {
             findNavController().navigate(R.id.action_userRegisterFragment_to_profileFragment2, bundleOf("id" to userId))
         }
     }

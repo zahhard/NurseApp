@@ -3,20 +3,16 @@ package com.example.nurseapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.nurseapp.R
 import com.example.nurseapp.data.database.CommentEntity
-import com.example.nurseapp.data.database.NurseEntity
 
 class CommentAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfItem) :
     ListAdapter<CommentEntity, CommentAdapter.ViewHolder>(DiffCallback) {
@@ -29,6 +25,16 @@ class CommentAdapter(var fragment: Fragment, private var showFilmDetails: showIn
         val date: TextView = view.findViewById<TextView>(R.id.comment_date)
 
     }
+
+//    override fun onCurrentListChanged(
+//        previousList: MutableList<CommentEntity>,
+//        currentList: MutableList<CommentEntity>
+//    ) {
+//        super.onCurrentListChanged(previousList, currentList)
+//        for (i in previousList.size..currentList.size-1){
+//            previousList.add(currentList[i])
+//        }
+//    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -44,7 +44,8 @@ class ProfileFragment : Fragment() {
 //        var userId = requireArguments().getInt("userId", 0)
 
         ppreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
-        var id = requireArguments().getInt("id", -1)
+        var id = ppreferences.getInt("id", -1)//requireArguments().getInt("id", -1)
+        binding.name.text = ppreferences.getString("name", "")
         binding.name.text = ppreferences.getString("name", "")
         var type = ppreferences.getString("as", "")
 
