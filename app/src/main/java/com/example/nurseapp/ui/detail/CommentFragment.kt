@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.nurseapp.databinding.FragmentCommentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class CommentFragment : Fragment() {
@@ -40,10 +41,16 @@ class CommentFragment : Fragment() {
 
         ppreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
 
-       var  nurseId = requireArguments().getInt("nurse", -1)
-       var  date = requireArguments().getString("date", "")
-       var  dayCount = requireArguments().getInt("day_count", -1)
-       var  userId = requireArguments().getInt("user", -1)
+        var nurseId = requireArguments().getInt("nurse", -1)
+        var date = requireArguments().getString("date", "")
+        var name = requireArguments().getString("name", "")
+        var education = requireArguments().getString("edu", "")
+        var dayCount = requireArguments().getInt("day_count", -1)
+        var userId = requireArguments().getInt("user", -1)
+
+        binding.name.text = name
+        binding.edu.text = education
+        binding.price.text = Random.nextInt(100000, 5000000).toString() + " $"
 
         binding.payment.setOnClickListener {
             if (ppreferences.getInt("id", -1) != -1) {
@@ -53,19 +60,21 @@ class CommentFragment : Fragment() {
                         dayCount,
                         nurseId,
                         ppreferences.getInt("id", -1),
+                        name,
+                        education
                     )
-                    Snackbar.make(binding.content, "Final payment was successful", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        binding.content,
+                        "Final payment was successful",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } else {
-                Toast.makeText(requireContext(), "Choose an other time please", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Choose an other time please", Toast.LENGTH_SHORT)
+                    .show()
 
             }
 
         }
-
-        Snackbar.make(binding.content, "message", Snackbar.LENGTH_SHORT).show()
-
-//    }
-
     }
 }

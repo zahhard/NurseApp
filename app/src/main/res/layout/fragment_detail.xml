@@ -68,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:text=""
-                        android:textColor="@color/black"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -111,7 +110,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.5"
-                            android:textColor="@color/black"
                             android:textSize="20sp" />
 
                         <ImageView
@@ -187,10 +185,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:textStyle="bold"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginTop="10dp"
                 android:text="Order"
-                android:textColor="@color/black"
                 android:textSize="18sp" />
 
 
@@ -210,7 +208,7 @@
 
             <EditText
                 android:layout_width="wrap_content"
-                android:paddingHorizontal="15dp"
+                android:paddingHorizontal="20dp"
                 android:inputType="date"
                 android:id="@+id/date"
                 android:layout_height="wrap_content"
@@ -230,19 +228,9 @@
                 android:layout_height="wrap_content"
                 android:text="submit"
                 android:id="@+id/submit"
-                android:layout_marginTop="5dp"
+                android:layout_marginVertical="5dp"
                 android:paddingHorizontal="25dp"
                 app:cornerRadius="15dp"/>
-
-            <TextView
-                android:id="@+id/tvDetailReview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textDirection="rtl"
-                android:textSize="18sp" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -255,7 +243,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Comments"
-                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -280,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Add comment"
-                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
 

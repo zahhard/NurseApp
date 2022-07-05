@@ -10,4 +10,12 @@ data class OrderEntity(
     var nurseId: Int,
     var start_time: String,
     var day_count: Int,
+    var name: String,
+    var edu: String,
 )
+
+class a (){
+   companion object {
+       var colorId = 0
+   }
+}

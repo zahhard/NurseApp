@@ -26,15 +26,10 @@ class CommentAdapter(var fragment: Fragment, private var showFilmDetails: showIn
 
     }
 
-//    override fun onCurrentListChanged(
-//        previousList: MutableList<CommentEntity>,
-//        currentList: MutableList<CommentEntity>
-//    ) {
-//        super.onCurrentListChanged(previousList, currentList)
-//        for (i in previousList.size..currentList.size-1){
-//            previousList.add(currentList[i])
-//        }
-//    }
+
+    fun update (newList: ArrayList<CommentEntity>){
+
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

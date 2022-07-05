@@ -3,7 +3,9 @@
     android:layout_width="180dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
+    android:id="@+id/card"
     app:cardCornerRadius="15dp"
+    app:cardBackgroundColor="#FFEC94"
     android:layout_height="wrap_content">
 
     <LinearLayout

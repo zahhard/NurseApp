@@ -42,37 +42,37 @@ class OrderAdapter(var fragment: Fragment, private var showFilmDetails: showInsi
 
 
         holder.nurseName.text = getItem(position).start_time
-        holder.order.text = getItem(position).start_time
+        holder.order.text = getItem(position).name
         holder.date.text = getItem(position).day_count.toString() + " day"
 
-//        if (getItem(position).education == "baby care"){
-//            Glide.with(fragment)
-//                .load("https://img.icons8.com/fluency/344/mother-room.png")
-//                .placeholder(android.R.drawable.ic_dialog_info)
-//                .error(android.R.drawable.ic_dialog_alert)
-//                .into(holder.imageView)
-//        }
-//        if (getItem(position).userId == "elderly care"){
-//            Glide.with(fragment)
-//                .load("https://img.icons8.com/color/344/elderly-person.png")
-//                .placeholder(android.R.drawable.ic_dialog_info)
-//                .error(android.R.drawable.ic_dialog_alert)
-//                .into(holder.imageView)
-//        }
-//        if (getItem(position).education == "general care"){
-//            Glide.with(fragment)
-//                .load("https://img.icons8.com/color/2x/examination.png")
-//                .placeholder(android.R.drawable.ic_dialog_info)
-//                .error(android.R.drawable.ic_dialog_alert)
-//                .into(holder.imageView)
-//        }
-//        if (getItem(position).education == "bandage"){
-//            Glide.with(fragment)
-//                .load("https://img.icons8.com/color/2x/cast.png")
-//                .placeholder(android.R.drawable.ic_dialog_info)
-//                .error(android.R.drawable.ic_dialog_alert)
-//                .into(holder.imageView)
-//        }
+        if (getItem(position).edu == "baby care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/fluency/344/mother-room.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).edu == "elderly care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/344/elderly-person.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).edu == "general care"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/2x/examination.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
+        if (getItem(position).edu == "bandage"){
+            Glide.with(fragment)
+                .load("https://img.icons8.com/color/2x/cast.png")
+                .placeholder(android.R.drawable.ic_dialog_info)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.imageView)
+        }
 
 
         holder.itemView.setOnClickListener {

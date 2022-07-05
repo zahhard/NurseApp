@@ -43,7 +43,7 @@ class DetailViewModel @Inject constructor(var appRepository: AppRepository) : Vi
         }
     }
 
-    fun setOrder(date: String, dayCount: Int, nurseId: Int, userId: Int) {
+    fun setOrder(date: String, dayCount: Int, nurseId: Int, userId: Int, name: String, edu :String) {
 
         getNurseOrder(nurseId)
 
@@ -52,7 +52,7 @@ class DetailViewModel @Inject constructor(var appRepository: AppRepository) : Vi
         }
 
         viewModelScope.launch {
-            var order = OrderEntity(Random.nextInt(0, 1000), userId, nurseId, date, dayCount)
+            var order = OrderEntity(Random.nextInt(0, 1000), userId, nurseId, date, dayCount, name, edu )
             appRepository.setOrder(order)
         }
     }

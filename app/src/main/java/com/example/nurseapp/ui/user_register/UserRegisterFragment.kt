@@ -3,6 +3,7 @@ package com.example.nurseapp.ui.user_register
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class UserRegisterFragment : Fragment() {
     private lateinit var binding: FragmentUserRegisterBinding
     private val userRegisterViewModel: UserRegisterViewModel by viewModels()
     lateinit var ppreferences: SharedPreferences
-    var userId = 0
+    var userId = -1
     var type = ""
     var filter = ""
 
@@ -57,7 +58,7 @@ class UserRegisterFragment : Fragment() {
             }
         }
 
-     binding.radioGroup.setOnCheckedChangeListener { radioGroup, i ->
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, i ->
 
             if (i == R.id.baby) {
                 filter = "Baby care"
@@ -74,51 +75,58 @@ class UserRegisterFragment : Fragment() {
         }
 
         binding.login.setOnClickListener {
-            userId = Random.nextInt(0, 1000)
 
-            if (type == "user"){
-                val user = UserEntity(
-                    userId,
-                    binding.firstNme.text.toString(),
-                    binding.lastName.text.toString(),
-                    binding.phone.text.toString(),
-                    binding.city.text.toString(),
-                    binding.address.text.toString(),
-                )
-                userRegisterViewModel.insertUser(user)
+
+            if (binding.firstNme.text.isNullOrBlank()) {
+                binding.firstNme.error = "empty"
             }
-            else if (type == "nurse"){
-                val nurse = NurseEntity(
-                    userId,
-                    userId,
-                    binding.firstNme.text.toString(),
-                    binding.lastName.text.toString(),
-                    binding.phone.text.toString(),
-                    0F,
-                    filter,
-                    "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000"
-
-                )
-                userRegisterViewModel.insertNurse(nurse)
+            else if (binding.lastName.text.isNullOrBlank()) {
+                binding.lastName.error = "empty"
             }
+            else if (binding.address.text.isNullOrBlank()) {
+                binding.address.error = "empty"
+            }
+            else if (binding.city.text.isNullOrBlank()) {
+                binding.city.error = "empty"
+            }
+           else if (binding.phone.text.isNullOrBlank()) {
+                binding.phone.error = "empty"
+            } else {
 
-            var name = binding.firstNme.text.toString() + " " + binding.lastName.text.toString()
+                userId = Random.nextInt(0, 1000)
 
-            val editor: SharedPreferences.Editor = ppreferences.edit()
-            editor.putString("name", name)
-            editor.putInt("id", userId)
-            editor.putString("as", type)
-            editor.apply()
-            Toast.makeText(requireContext(), "dddd", Toast.LENGTH_SHORT).show()
+                if (type == "user") {
 
-            goToProfile()
+                    val user = UserEntity(userId, binding.firstNme.text.toString(), binding.lastName.text.toString(), binding.phone.text.toString(), binding.city.text.toString(), binding.address.text.toString(),
+                    )
+                    userRegisterViewModel.insertUser(user)
+                } else if (type == "nurse") {
+                    val nurse = NurseEntity(userId, userId, binding.firstNme.text.toString(), binding.lastName.text.toString(), binding.phone.text.toString(), 0F, filter, "https://img.freepik.com/free-photo/healthcare-workers-preventing-virus-quarantine-campaign-concept-smiling-pleasant-asian-female-physician-doctor-during-examination-wearing-scrubs-holding-clipboard-white-background_1258-21394.jpg?w=2000")
+
+                    userRegisterViewModel.insertNurse(nurse)
+                }
+
+
+                var name = binding.firstNme.text.toString() + " " + binding.lastName.text.toString()
+
+                val editor: SharedPreferences.Editor = ppreferences.edit()
+                editor.putString("name", name)
+                editor.putInt("id", userId)
+                editor.putString("as", type)
+                editor.apply()
+                Toast.makeText(requireContext(), "successful", Toast.LENGTH_SHORT).show()
+
+                goToProfile()
+            }
         }
-
     }
 
     private fun goToProfile() {
-        if (  ppreferences.getInt("id", -1) != -1) {
-            findNavController().navigate(R.id.action_userRegisterFragment_to_profileFragment2, bundleOf("id" to userId))
+        if ( ppreferences.getInt("id", -1) != -1) {
+            findNavController().navigate(
+                R.id.action_userRegisterFragment_to_profileFragment2,
+                bundleOf("id" to userId)
+            )
         }
     }
 }

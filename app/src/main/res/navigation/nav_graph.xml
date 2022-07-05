@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_detailFragment_to_commentFragment"
             app:destination="@id/commentFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_userRegisterFragment"
+            app:destination="@id/userRegisterFragment" />
     </fragment>
     <fragment
         android:id="@+id/insideEachCategoryFragment"
@@ -55,6 +58,9 @@
         <action
             android:id="@+id/action_profileFragment_to_userRegisterFragment"
             app:destination="@id/userRegisterFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/allNursesFragment"

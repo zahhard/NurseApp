@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(var appRepository: AppRepository) : View
 
     fun setTestOrder() {
         viewModelScope.launch {
-            var a = OrderEntity(1, 5, 0, "20200.08.09", 1)
+            var a = OrderEntity(1, 5, 0, "20200.08.09", 1, "", "")
             appRepository.insertOrder(a)
         }
     }

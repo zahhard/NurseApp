@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,10 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     val detailViewModel: DetailViewModel by viewModels()
     var nurseId = -1
+    var nurseName = ""
+    var nurseEducation = ""
     lateinit var ppreferences: SharedPreferences
+    var adapter = CommentAdapter(this) { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +63,67 @@ class DetailFragment : Fragment() {
         ppreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
 
         checkInternetConnection()
+        observeComment()
+        binding.submit.setOnClickListener {
+            submitOrder()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun submitOrder() {
+        if (ppreferences.getString("as", "") == "user") {
+            if (ppreferences.getInt("id", -1) != -1) {
+
+                if (binding.dayCount.text.isNullOrBlank()) {
+
+                    binding.dayCount.error = "empty"
+                }
+                if (binding.date.text.isNullOrBlank()) {
+
+                    binding.date.error = "empty"
+                }else{
+
+                var bundle = bundleOf(
+                    "date" to binding.date.text.toString(),
+                    "day_count" to binding.dayCount.text.toString().toInt(),
+                    "nurse" to nurseId,
+                    "user" to ppreferences.getInt("id", -1),
+                    "name" to nurseName,
+                    "edu" to nurseEducation
+                )
+                findNavController().navigate(
+                    R.id.action_detailFragment_to_commentFragment,
+                    bundle
+                )
 
 
+                }
+            } else {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("")
+                    .setMessage("You don't have account ")
+                    .setNegativeButton("not now") { _, _ -> checkInternetConnection() }
+                    .setPositiveButton("register") { _, _ -> goToRegister() }
+                    .setCancelable(false)
+                    .show()
+            }
+        } else{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Invalid order")
+                .setMessage("You cannot order with nurse kine of account")
+                .setPositiveButton("ok") { _, _ -> }
+                .setCancelable(false)
+                .show()
+        }
+    }
+
+    private fun observeComment() {
         detailViewModel.nurseCommentsLiveData.observe(viewLifecycleOwner) {
             val manager = LinearLayoutManager(requireContext())
             binding.recyclerview.layoutManager = manager
-            var adapter = CommentAdapter(this) { }
+            Log.d("ccc", detailViewModel.nurseCommentsLiveData.value!!.toString())
             adapter.submitList(it)
+            Log.d("ccc", detailViewModel.nurseCommentsLiveData.value!!.toString())
             adapter.notifyDataSetChanged()
             binding.recyclerview.adapter = adapter
             binding.recyclerview.layoutManager = LinearLayoutManager(
@@ -73,26 +131,10 @@ class DetailFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL, false
             )
         }
+    }
 
-        if (ppreferences.getInt("id", -1) != -1) {
-            binding.submit.setOnClickListener {
-
-
-
-                var bundle = bundleOf(
-                    "date" to binding.date.text.toString(),
-                    "day_count" to binding.dayCount.text.toString().toInt(),
-                    "nurse" to nurseId,
-                    "user" to ppreferences.getInt("id", -1)
-                )
-
-                findNavController().navigate(R.id.action_detailFragment_to_commentFragment, bundle)
-
-
-
-
-            }
-        }
+    private fun goToRegister() {
+        findNavController().navigate(R.id.action_detailFragment_to_userRegisterFragment)
     }
 
 
@@ -100,6 +142,8 @@ class DetailFragment : Fragment() {
         detailViewModel.nurseItemLiveData.observe(viewLifecycleOwner) {
 
             if (it != null) {
+                nurseName = it.fname + " " + it.lname
+                nurseEducation = it.education
                 detailViewModel.getComments(it.nurseID)
                 binding.tvDetailName.text = it.fname + " " + it.lname
                 binding.rating.text = it.average_rate.toString()
@@ -172,30 +216,49 @@ class DetailFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun addComment() {
         binding.submitComment.setOnClickListener {
-            if (ppreferences.getInt("id", -1) != -1) {
-                var id = Random.nextInt(0, 100)
+
+            if (ppreferences.getString("as", "") == "user") {
+                if (ppreferences.getInt("id", -1) != -1) {
+                    var id = Random.nextInt(0, 100)
 
 
-                val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-                val formatted = current.format(formatter)
+                    val current = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+                    val formatted = current.format(formatter)
 
-                var comment = CommentEntity(
-                    id,
-                    nurseId,
-                    binding.commentEditText.text.toString(),
-                    formatted,
-                    ppreferences.getString("name", "")!!
-                )
-                detailViewModel.insertOneComment(comment)
+                    var comment = CommentEntity(
+                        id,
+                        nurseId,
+                        binding.commentEditText.text.toString(),
+                        formatted,
+                        ppreferences.getString("name", "")!!
+                    )
 
-                Toast.makeText(requireContext(), "Your comment submit", Toast.LENGTH_SHORT).show()
-                binding.commentEditText.text = null
+                    Log.d("aa", detailViewModel.nurseCommentsLiveData.value!!.toString())
+                    detailViewModel.insertOneComment(comment)
+                    Log.d("aa", detailViewModel.nurseCommentsLiveData.value!!.toString())
+                    Toast.makeText(requireContext(), "Your comment submit", Toast.LENGTH_SHORT)
+                        .show()
+
+                    binding.commentEditText.text = null
+
+                    var list = detailViewModel.nurseCommentsLiveData.value!!.toMutableList()
+                    list.add(comment)
+                    adapter.submitList(list.toList())
+                    adapter.notifyDataSetChanged()
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("")
+                        .setMessage("You don't have account ")
+                        .setPositiveButton("ok") { _, _ -> checkInternetConnection() }
+                        .setCancelable(false)
+                        .show()
+                }
             } else {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("")
-                    .setMessage("You don't have account ")
-                    .setPositiveButton("ok") { _, _ -> checkInternetConnection() }
+                    .setTitle("Invalid comment")
+                    .setMessage("You cannot comment with nurse kine of account")
+                    .setPositiveButton("ok") { _, _ -> }
                     .setCancelable(false)
                     .show()
             }

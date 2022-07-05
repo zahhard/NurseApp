@@ -1,11 +1,13 @@
 package com.example.nurseapp.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.nurseapp.R
 import com.example.nurseapp.data.database.NurseEntity
+import com.example.nurseapp.data.database.a
 import com.example.nurseapp.model.Nurse
 
 class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: showInsideOfItem) :
@@ -27,6 +30,7 @@ class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: show
         val education = view.findViewById<TextView>(R.id.education_name)
         val name: TextView = view.findViewById<TextView>(R.id.person_name)
         val rate: RatingBar = view.findViewById(R.id.rating)
+        var card : CardView = view.findViewById(R.id.card)
     }
 
 
@@ -54,7 +58,7 @@ class TopNursesAdapter(var fragment: Fragment, private var showFilmDetails: show
         holder.itemView.setOnClickListener {
             showFilmDetails(getItem(position).nurseID)
         }
-
+        holder.card.setCardBackgroundColor(Color.parseColor("#ECECEC"));
         holder.itemView.onFocusChangeListener
 
     }

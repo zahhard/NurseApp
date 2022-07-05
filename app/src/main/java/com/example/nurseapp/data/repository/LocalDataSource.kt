@@ -51,10 +51,10 @@ class LocalDataSource  @Inject constructor( val appDatabase: AppDatabase ) {
             NurseEntity(16,16,"Mohsen", "Badali", "09558741259", 3F, "elderly care", "https://www.waldenu.edu/-/media/walden/images/seo-article/seo-662-bs-healthcare-people-group-profe-294762073-1200x675.jpg?rev=332db21ba2204fcead5a558d2bab91f0&hash=B97575BB15C2BB8093057C34E8EAD1D5"),
         )
         appDatabase.companyDao().insertOrder(
-            OrderEntity(1,173285739,0,"2022.05.6",5,),
-            OrderEntity(2,173285739,1, "2022.05.6",3),
-            OrderEntity(3,173285739, 2, "2022.05.6",4),
-            OrderEntity(4,173285739,3, "2022.05.6",1),
+//            OrderEntity(1,173285739,0,"2022.05.6",5, ),
+//            OrderEntity(2,173285739,1, "2022.05.6",3),
+//            OrderEntity(3,173285739, 2, "2022.05.6",4),
+//            OrderEntity(4,173285739,3, "2022.05.6",1),
         )
         appDatabase.companyDao().insertComment(
             CommentEntity(0, 1, "very good1", "2020.05.1", "Farid1"),

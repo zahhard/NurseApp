@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.nurseapp.R
+import com.example.nurseapp.data.database.a
 import com.example.nurseapp.model.Category
 
 
@@ -32,6 +33,7 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
         val  imageViewItemCategory: ImageView = view.findViewById<ImageView>(R.id.rounded_image)
 //        val  cardView = view.findViewById<CardView>(R.id.cardView)
         val title: TextView = view.findViewById<TextView>(R.id.category_name)
+        var card : CardView = view.findViewById(R.id.card)
     }
 
 
@@ -53,6 +55,17 @@ class CategoryAdapter(var fragment: Fragment, private var showFilmDetails: showI
 //            .apply(RequestOptions.circleCropTransform())
             .transform(transformation)
             .into(holder.imageViewItemCategory)
+
+        val  colorList = arrayListOf("#F6DAE4", "#D4F0F7", "#D0D5F7", "#B8CFEC", "#FFEC94")
+
+
+        if (a.colorId < 4){
+            holder.card.setCardBackgroundColor(Color.parseColor(colorList[a.colorId]));
+            a.colorId ++
+        }
+        else
+            a.colorId = 0
+
 
 
         holder.itemView.setOnClickListener {
